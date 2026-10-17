@@ -1,11 +1,13 @@
 name: Release
 
-# Push a tag equal to manifest.json's version (e.g. 1.0.1) to publish a release
-# with the files Obsidian and BRAT install: main.js, manifest.json, styles.css.
+# Publishes a release with the files Obsidian and BRAT install (main.js,
+# manifest.json, styles.css) for the version in manifest.json. Run it from the
+# Actions tab, or push a tag equal to that version (e.g. 1.0.1).
 on:
   push:
     tags:
       - "*"
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -21,9 +23,12 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
-      - name: Check the tag matches manifest.json
-        run: test "$(node -p 'require("./manifest.json").version')" = "$GITHUB_REF_NAME"
+      - name: Read the version from manifest.json
+        run: echo "VERSION=$(node -p 'require("./manifest.json").version')" >> "$GITHUB_ENV"
+      - name: Check a pushed tag matches manifest.json
+        if: github.ref_type == 'tag'
+        run: test "$VERSION" = "$GITHUB_REF_NAME"
       - name: Create release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "$GITHUB_REF_NAME" main.js manifest.json styles.css --title "$GITHUB_REF_NAME" --generate-notes
+        run: gh release create "$VERSION" main.js manifest.json styles.css --title "$VERSION" --target "$GITHUB_SHA" --generate-notes

@@ -60,6 +60,7 @@ npm run build   # type-checks, then bundles src/main.ts into main.js
 
 ## Release
 
-Bump `version` in `manifest.json`, `package.json` and `versions.json`, then push
-a tag with the same version (for example `1.0.1`). The release workflow builds
-the plugin and attaches `main.js`, `manifest.json` and `styles.css`.
+Bump `version` in `manifest.json`, `package.json` and `versions.json` and push to
+`main`. Then run the **Release** workflow from the Actions tab, or push a tag
+with the same version (for example `1.0.1`). It builds the plugin and publishes
+a release with `main.js`, `manifest.json` and `styles.css`.
