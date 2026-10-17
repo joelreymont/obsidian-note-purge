@@ -1,4 +1,4 @@
-import { App, Menu, Modal, Notice, Plugin, Setting, TFile, View } from "obsidian";
+import { App, type EventRef, Menu, Modal, Notice, Plugin, Setting, TFile, View } from "obsidian";
 
 // The core Search view triggers "search:results-menu" just before showing its
 // ⋯ menu (the one with "Copy search results"); the core Bookmarks plugin hooks

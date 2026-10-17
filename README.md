@@ -1,66 +1,57 @@
 # Note Purge
 
-An Obsidian plugin that adds a **Delete N results…** item to the search pane's
-⋯ menu (the one next to the result count, with *Copy search results* and
-*Bookmark…*). It deletes every file in the current results, so searching for
-`tag:#project`, or clicking a tag in the Tags pane, lets you delete every note
-with that tag at once.
+Delete every note in the current search results at once, for example all notes
+with a given tag.
 
-## Install
+![The Delete item in the search results menu, and the confirmation dialog listing the files to delete](images/screenshot.png)
 
-### With BRAT (desktop, iPhone, iPad, Android)
+## Usage
 
-1. Install **BRAT** from **Settings → Community plugins → Browse** and enable it.
-2. Open the command palette and run **BRAT: Plugins: Add a beta plugin for
-   testing (with or without version)**, then enter
-   `joelreymont/obsidian-note-purge`.
-3. Enable **Note Purge** in **Settings → Community plugins**.
+1. Search for the notes to delete, for example `tag:#archive`, or click a tag
+   in the Tags view.
+2. Click the result count (**5 results**) at the top of the search pane.
+3. Choose **Delete 5 results…**.
+4. Check the files listed in the dialog, then select **Delete 5 files**.
 
-BRAT also installs updates when new releases are published.
+## Behavior
 
-### Manually
-
-1. Download `main.js`, `manifest.json` and `styles.css` from the
-   [latest release](https://github.com/joelreymont/obsidian-note-purge/releases/latest).
-2. Put them in `<your vault>/.obsidian/plugins/note-purge/`.
-3. In **Settings → Community plugins**, turn off Restricted mode if it is on,
-   click the reload button, and enable **Note Purge**.
-
-## Use
-
-1. Search for a tag (`tag:#project`), or click a tag in the Tags pane.
-2. Click the result count (**3 results ⋯**) at the top of the search pane.
-3. Choose **Delete 3 results…**. A dialog lists every file that will be
-   deleted. Nothing is touched until you click **Delete 3 files**.
-
-Good to know:
-
+- Exactly the files listed in the dialog are deleted. A tag search also matches
+  nested tags: `tag:#archive` includes notes tagged `#archive/ideas`.
 - Files are deleted according to **Settings → Files and links → Deleted
-  files**: system trash, the vault's `.trash` folder, or permanently. The
-  dialog says which, and warns in red when deletion is permanent.
-- `tag:#project` also matches nested tags such as `#project/sub`. That is how
-  Obsidian's search works, so check the list in the dialog.
-- The item is disabled while a search is still running and when there are no
-  results.
-- Attachments that only the deleted notes linked to are not deleted.
-- The search pane's ⋯ menu has no documented plugin API. The plugin uses the
-  internal `search:results-menu` event, which Obsidian's own Bookmarks plugin
-  uses to add *Bookmark…*. If a future Obsidian release changes it, the item
-  just stops appearing; it cannot delete the wrong files.
+  files**: moved to the system trash, moved to the vault's `.trash` folder, or
+  deleted permanently. The dialog says which, in red when it's permanent.
+- Attachments linked from the deleted notes are kept.
+- The menu item is disabled while a search is still running, or when there are
+  no results.
+- Works on desktop and mobile, with Obsidian 1.6.6 or later.
 
-Tested on Obsidian 1.14.4, on desktop and in Obsidian's phone and tablet
-layouts (mobile emulation). Requires 1.6.6 or later.
+Obsidian has no public API for the search results menu, so Note Purge uses the
+internal `search:results-menu` event, the same one the core Bookmarks plugin
+uses to add **Bookmark...**. If a future Obsidian version changes that event,
+the Delete item stops appearing and nothing is deleted.
 
-## Build from source
+## Installation
+
+In Obsidian, open **Settings → Community plugins → Browse**, search for
+**Note Purge**, then select **Install** and **Enable**.
+
+To install from GitHub instead, add `joelreymont/obsidian-note-purge` in
+[BRAT](https://github.com/TfTHacker/obsidian42-brat), or copy `main.js`,
+`manifest.json` and `styles.css` from the
+[latest release](https://github.com/joelreymont/obsidian-note-purge/releases/latest)
+into `<vault>/.obsidian/plugins/note-purge/`.
+
+## Development
 
 ```bash
 npm install
-npm run build   # type-checks, then bundles src/main.ts into main.js
+npm run build   # type-check, then bundle src/main.ts into main.js
 ```
 
-## Release
+To release, bump `version` in `manifest.json`, `package.json` and
+`versions.json`, push to `main`, and run the **Release** workflow from the
+Actions tab (or push a tag with the same version).
 
-Bump `version` in `manifest.json`, `package.json` and `versions.json` and push to
-`main`. Then run the **Release** workflow from the Actions tab, or push a tag
-with the same version (for example `1.0.1`). It builds the plugin and publishes
-a release with `main.js`, `manifest.json` and `styles.css`.
+## License
+
+[MIT](LICENSE)
