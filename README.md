@@ -3,15 +3,23 @@
 Delete every note in the current search results at once, for example all notes
 with a given tag.
 
-![The Delete item in the search results menu, and the confirmation dialog listing the files to delete](images/screenshot.png)
-
 ## Usage
 
 1. Search for the notes to delete, for example `tag:#archive`, or click a tag
    in the Tags view.
-2. Click the result count (**5 results**) at the top of the search pane.
-3. Choose **Delete 5 results…**.
-4. Check the files listed in the dialog, then select **Delete 5 files**.
+2. Click the result count (**5 results**) at the top of the search pane, then
+   choose **Delete 5 results…**.
+
+   ![The search results menu with a red Delete 5 results item below Copy search results and Bookmark](images/menu.png)
+
+3. Check the files listed in the dialog, then select **Delete 5 files**. A
+   notice confirms how many files were deleted.
+
+   ![The Delete 5 files dialog listing the five matching notes, with Cancel and Delete 5 files buttons](images/dialog.png)
+
+On a phone, the menu opens as a sheet at the bottom of the screen:
+
+![Phone layout: the menu sheet with the Delete item, and the same confirmation dialog](images/mobile.png)
 
 ## Behavior
 
