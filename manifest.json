@@ -1,0 +1,10 @@
+{
+	"id": "note-purge",
+	"name": "Note Purge",
+	"version": "1.0.0",
+	"minAppVersion": "1.6.6",
+	"description": "Adds a Delete option to the search pane's ⋯ menu that deletes every file in the current results, for example every note with a given tag.",
+	"author": "Joel Reymont",
+	"authorUrl": "https://github.com/joelreymont",
+	"isDesktopOnly": false
+}

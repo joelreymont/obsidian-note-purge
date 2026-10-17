@@ -1,0 +1,15 @@
+.note-purge-list {
+	max-height: 40vh;
+	overflow-y: auto;
+	margin: 0 0 1em;
+	padding: 0.5em 0.5em 0.5em 2em;
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--radius-s);
+	font-size: var(--font-ui-small);
+	user-select: text;
+}
+
+.note-purge-warning {
+	color: var(--text-error);
+	font-weight: var(--font-semibold);
+}
