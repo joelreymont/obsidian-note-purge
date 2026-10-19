@@ -1,7 +1,7 @@
 {
 	"id": "note-purge",
 	"name": "Note Purge",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"minAppVersion": "1.6.6",
 	"description": "Delete every note in the current search results at once, for example all notes with a given tag.",
 	"author": "Joel Reymont",

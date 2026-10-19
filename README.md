@@ -47,7 +47,9 @@ To install from GitHub instead, add `joelreymont/obsidian-note-purge` in
 [BRAT](https://github.com/TfTHacker/obsidian42-brat), or copy `main.js`,
 `manifest.json` and `styles.css` from the
 [latest release](https://github.com/joelreymont/obsidian-note-purge/releases/latest)
-into `<vault>/.obsidian/plugins/note-purge/`.
+into `<vault>/.obsidian/plugins/note-purge/`. Release files are attested by
+GitHub; check a download with
+`gh attestation verify main.js -R joelreymont/obsidian-note-purge`.
 
 ## Development
 

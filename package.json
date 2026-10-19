@@ -1,6 +1,6 @@
 {
 	"name": "note-purge",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"private": true,
 	"description": "Delete every note in the current search results at once, for example all notes with a given tag.",
 	"main": "main.js",

@@ -1,4 +1,16 @@
-import { App, type EventRef, Menu, Modal, Notice, Plugin, Setting, TFile, View } from "obsidian";
+import {
+	App,
+	type ButtonComponent,
+	type EventRef,
+	Menu,
+	Modal,
+	Notice,
+	Plugin,
+	requireApiVersion,
+	Setting,
+	TFile,
+	View,
+} from "obsidian";
 
 // The core Search view triggers "search:results-menu" just before showing its
 // ⋯ menu (the one with "Copy search results"); the core Bookmarks plugin hooks
@@ -96,20 +108,32 @@ class ConfirmDeleteModal extends Modal {
 			.addButton((button) =>
 				button.setButtonText("Cancel").onClick(() => this.close()),
 			)
-			.addButton((button) =>
-				button
-					.setButtonText(`Delete ${count}`)
-					.setWarning()
-					.onClick(() => {
-						this.close();
-						void deleteFiles(this.app, files);
-					}),
-			);
+			.addButton((button) => {
+				button.setButtonText(`Delete ${count}`).onClick(() => {
+					this.close();
+					void deleteFiles(this.app, files);
+				});
+				styleAsDestructive(button);
+			});
 	}
 
 	onClose() {
 		this.contentEl.empty();
 	}
+}
+
+// setDestructive arrived in Obsidian 1.13. Older versions only have
+// setWarning, which gives the button the same red style.
+function styleAsDestructive(button: ButtonComponent) {
+	if (requireApiVersion("1.13.0")) {
+		button.setDestructive().setCta();
+	} else {
+		(button as LegacyButton).setWarning();
+	}
+}
+
+interface LegacyButton {
+	setWarning(): unknown;
 }
 
 async function deleteFiles(app: App, files: TFile[]) {
